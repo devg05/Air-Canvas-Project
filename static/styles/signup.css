@@ -1,7 +1,7 @@
 body {
-    margin: auto;
     background-color: #f7f7f7;
     font-family: Arial, sans-serif;
+    margin : auto;
 }
 
 h1 {
@@ -11,33 +11,37 @@ h1 {
 
 form {
     background-color: #fff;
-    padding: 20px;
+    padding: 30px;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     width: 300px;
+    margin: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
 input[type="text"],
-input[type="password"] {
+input[type="password"],
+input[type="email"] {
     width: 100%;
-    padding: 10px;
+    padding: 12px;
     margin: 10px 0;
     border: 1px solid #ccc;
     border-radius: 5px;
     box-sizing: border-box;
+    font-size: 14px; 
 }
 
 button {
     background-color: #007bff;
     color: white;
     border: none;
-    padding: 10px;
+    padding: 12px;
     border-radius: 5px;
     cursor: pointer;
     width: 200px;
+    font-size: 16px;
 }
 
 button:hover {
@@ -49,6 +53,7 @@ a {
     margin-top: 10px;
     text-decoration: none;
     color: #007bff;
+    font-size: 14px; /* Adjusted font size */
 }
 
 a:hover {

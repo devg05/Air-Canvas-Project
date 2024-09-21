@@ -20,7 +20,7 @@ def video():
 def video_feed():
     return Response(generate_frames(),mimetype='multipart/x-mixed-replace; boundary=frame')
 
-@app.route('/login', methods = ["POST"])
+@app.route('/login', methods = ["GET", "POST"])
 def login_page():
     if request.method == "POST":
         usern = request.form.get('user')
@@ -36,13 +36,13 @@ def login_page():
             if (data['password'] != passw):
                 return "Wrong Credentials"
             else:
-                return render_template('video.html')
+                return render_template('index.html')
         else:
             return "Wrong Credentials"
         
     return render_template('login.html')
 
-@app.route('/signup', methods = ["POST"])
+@app.route('/signup', methods = ["GET", "POST"])
 def signup_page():
     if request.method == "POST":
         usern = request.form.get('user')
@@ -65,4 +65,4 @@ def internal_error(error):
     return "An internal error occurred.", 500
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host='0.0.0.0', port=5000, debug=True)
