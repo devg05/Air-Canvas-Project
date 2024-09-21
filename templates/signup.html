@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/loginpage.css') }}">
+  <title>AIR CANVAS</title>
+</head>
+
+<body>
+  <br>
+  <center>
+    <h1><b>Welcome to Air Canvas!</b></h1>
+    <br>
+    <h1> Create Your Free Account </h1>
+    <div>
+    <form action="/signup" method="POST">
+        <input name="user" id="user" type="text" placeholder="Username">
+        <input name="pass" id="pass" type="password" placeholder="Password">
+        <input name="email" id="email" type="email" placeholder="abc@email.com">
+        <button> Create New Account </button>
+    </form>
+    <a href="/login"> Already have an Account</a>
+    </div>
+ </center>
+
