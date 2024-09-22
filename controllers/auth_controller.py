@@ -25,17 +25,17 @@ def login_page():
         
         if (data) is not None:
             if (data['password'] != passw):
-                error_message = "Wrong Credentials"
-                return render_template('login.html', error=error_message)
+                error_msg = "Wrong Credentials"
+                return render_template('login.html', error=error_msg)
             else:
                 tokens = generate_tokens(usern)
                 resp = make_response(render_template('index.html'))
-                resp.set_cookie('access_token_cookie', tokens.get('access_token'), httponly=True, samesite='Lax')
-                resp.set_cookie('refresh_token_cookie', tokens.get('refresh_token'), httponly=True, samesite='Lax')
+                resp.set_cookie('access_token', tokens.get('access_token'), httponly=True, samesite='Lax')
+                resp.set_cookie('refresh_token', tokens.get('refresh_token'), httponly=True, samesite='Lax')
                 return resp
         else:
-            error_message = "Wrong Credentials"
-            return render_template('login.html', error=error_message)
+            error_msg = "Wrong Credentials"
+            return render_template('login.html', error=error_msg)
         
     return render_template('login.html')
 

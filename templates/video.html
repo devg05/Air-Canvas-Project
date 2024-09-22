@@ -14,7 +14,7 @@
   <center>
     <h1><b>Welcome to Air Canvas!</b></h1>
     <!-- Initially hide the image -->
-    <img src="{{ url_for('user_routes.video_feed') }}" id="canvas" style="display: none;"><br><br>
+    <img src="" id="canvas" style="display: none;"><br><br>
     <a href="javascript:void(0);" role="button" id="pause" onclick="toggleVideo()">START</a>
     <a href="{{url_for('user_routes.index')}}" role="button">BACK</a>
   </center>
@@ -22,20 +22,22 @@
   {% include "footer.html" %}
 
   <script>
-      function toggleVideo() {
-          const videoContainer = document.getElementById('canvas');
-          const button = document.getElementById('pause');
+    function toggleVideo() {
+      const videoContainer = document.getElementById('canvas');
+      const button = document.getElementById('pause');
 
-          if (videoContainer.style.display === 'none') {
-              // Show the image and change button text to STOP
-              videoContainer.style.display = 'block';
-              button.textContent = 'STOP';
-          } else {
-              // Hide the image and change button text to START
-              videoContainer.style.display = 'none';
-              button.textContent = 'START';
-          }
+      if (videoContainer.style.display === 'none') {
+        // Show the image and change button text to STOP
+        videoContainer.style.display = 'block';
+        videoContainer.src = "{{ url_for('user_routes.video_feed') }}";
+        button.textContent = 'STOP';
+      } else {
+        // Hide the image and break the connection
+        videoContainer.style.display = 'none';
+        videoContainer.src = "";
+        button.textContent = 'START';
       }
+    }
   </script>
 
 </body>
