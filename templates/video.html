@@ -20,7 +20,25 @@
   </center>
 
   {% include "footer.html" %}
-
+  
+  <script>
+    async function requestCameraAccess() {
+      try {
+        // Request camera access without assigning the stream to a video element
+        const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+        console.log("Camera access granted");
+        
+        // Stop all tracks immediately after granting access (to avoid continuous streaming)
+        stream.getTracks().forEach(track => track.stop());
+        
+      } catch (error) {
+        console.error('Error accessing camera:', error);
+        alert('Camera access is required to use this feature.');
+      }
+    }
+    requestCameraAccess();
+  </script> 
+  
   <script>
     function toggleVideo() {
       const videoContainer = document.getElementById('canvas');
