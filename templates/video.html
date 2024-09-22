@@ -1,23 +1,43 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
-  <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
-    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/mainpage.css') }}">
-  <title>AIR CANVAS | HCI Project</title>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/mainpage.css') }}">
+  <title>AIR CANVAS</title>
 </head>
 
 <body>
   <br>
   <center>
     <h1><b>Welcome to Air Canvas!</b></h1>
-  <img src="{{ url_for('user_routes.video_feed') }}"><br><br>
-  <a class="btn btn-primary mr-1" href="{{url_for('user_routes.video')}}" role="button">START</a>
-  <a class="btn btn-primary" href="{{url_for('user_routes.index')}}" role="button">BACK</a>
- </center>
+    <!-- Initially hide the image -->
+    <img src="{{ url_for('user_routes.video_feed') }}" id="canvas" style="display: none;"><br><br>
+    <a href="javascript:void(0);" role="button" id="pause" onclick="toggleVideo()">START</a>
+    <a href="{{url_for('user_routes.index')}}" role="button">BACK</a>
+  </center>
+
+  {% include "footer.html" %}
+
+  <script>
+      function toggleVideo() {
+          const videoContainer = document.getElementById('canvas');
+          const button = document.getElementById('pause');
+
+          if (videoContainer.style.display === 'none') {
+              // Show the image and change button text to STOP
+              videoContainer.style.display = 'block';
+              button.textContent = 'STOP';
+          } else {
+              // Hide the image and change button text to START
+              videoContainer.style.display = 'none';
+              button.textContent = 'START';
+          }
+      }
+  </script>
+
+</body>
+
+</html>

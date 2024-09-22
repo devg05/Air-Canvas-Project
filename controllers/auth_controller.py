@@ -25,15 +25,17 @@ def login_page():
         
         if (data) is not None:
             if (data['password'] != passw):
-                return "Wrong Credentials",401
+                error_message = "Wrong Credentials"
+                return render_template('login.html', error=error_message)
             else:
                 tokens = generate_tokens(usern)
-                resp = make_response(render_template('video.html'))
+                resp = make_response(render_template('index.html'))
                 resp.set_cookie('access_token_cookie', tokens.get('access_token'), httponly=True, samesite='Lax')
                 resp.set_cookie('refresh_token_cookie', tokens.get('refresh_token'), httponly=True, samesite='Lax')
                 return resp
         else:
-            return "Wrong Credentials",401
+            error_message = "Wrong Credentials"
+            return render_template('login.html', error=error_message)
         
     return render_template('login.html')
 
@@ -47,9 +49,21 @@ def signup_page():
         form_data = {'name':usern, 'password':passw, 'email':email}
         
         try:
-            inserted_id = db_conn.insert_document(form_data)
-            print(f"Document inserted with ID: {inserted_id}")
-            return render_template('login.html')
+            find_user = db['users'].find_one({"name":usern})
+            find_email = db['users'].find_one({"email":email})
+            if (find_user) is not None:
+                error_msg = "Username Already Exists!"
+                return render_template('signup.html', error=error_msg)
+            if (find_email) is not None:
+                error_msg = "Account Already Exists with this Email!"
+                return render_template('signup.html', error=error_msg)
+            
+            if all([usern, passw, email]):
+                inserted_id = db_conn.insert_document(form_data)
+                print(f"Document inserted with ID: {inserted_id}")
+                login_msg = "Account Registered Successfully"
+                return render_template('login.html', login=login_msg)
+
         except ValueError as e:
             print(f"Validation Error: {e}")
     

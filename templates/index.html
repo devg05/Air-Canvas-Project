@@ -1,16 +1,11 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
-  <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
-    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/mainpage.css') }}">
-
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/mainpage.css') }}">
   <title>AIR CANVAS</title>
 </head>
 
@@ -19,16 +14,14 @@
   <center>
     <h1><b>Welcome to Air Canvas!</b></h1>
     <form action="{{url_for('user_routes.video')}}"><br><br><br><br>
-      <h4><b>Ever wanted to draw your imagination by just waving your finger in the air?<br>Our software allows you to
-          capture what you draw in air!<br>Don't believe us? Go ahead and click on the button below!</b> </h4><br>
-        
-      <input class="btn btn-primary" type="submit" value="LET'S DRAW!">
-  </form> <br><br><br>
- </center>
- 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
-    crossorigin="anonymous"></script>
+      <h4 id="content"><b>Ever wanted to draw your imagination by just waving your finger in the air?<br>My project allows you to
+          capture what you draw in air!<br>Don't believe me? Go ahead and click on the button below!</b> </h4><br>
+
+      <button> LET'S DRAW </button>
+    </form> <br><br><br>
+  </center>
+
+  {% include "footer.html" %}
 </body>
 
 </html>

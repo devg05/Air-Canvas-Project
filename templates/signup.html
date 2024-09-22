@@ -1,12 +1,11 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
-  <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/signup.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/signup.css') }}">
   <title>AIR CANVAS</title>
 </head>
 
@@ -16,12 +15,18 @@
     <h1><b>Welcome to Air Canvas!</b></h1>
     <br>
     <h1> Create Your Free Account </h1>
+    {% if error %}
+        <p style="color: red;">{{ error }}</p>  <!-- Display the error message -->
+    {% endif %}
     <form action="{{ url_for('auth_routes.signup_page') }}" method="POST">
-        <input name="user" id="user" type="text" placeholder="Username">
-        <input name="pass" id="pass" type="password" placeholder="Password">
-        <input name="email" id="email" type="email" placeholder="abc@email.com">
-        <button> Create New Account </button>
+      <input name="user" id="user" type="text" placeholder="Username" required>
+      <input name="pass" id="pass" type="password" placeholder="Password" required>
+      <input name="email" id="email" type="email" placeholder="abc@email.com" required>
+      <button> Create New Account </button>
     </form>
     <a href="{{ url_for('auth_routes.login_page') }}"> Already have an Account</a>
- </center>
+  </center>
+  {% include "footer.html" %}
+</body>
 
+</html>

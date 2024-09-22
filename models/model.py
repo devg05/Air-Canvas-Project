@@ -1,7 +1,8 @@
 from pymongo.mongo_client import MongoClient
+import os
 
 class DatabaseConnection:
-    def __init__(self, uri="mongodb://localhost:27017/", db_name="air-canvas", collection_name="users"):
+    def __init__(self, uri=str(os.getenv('URI')), db_name="air-canvas", collection_name="users"):
         self.client = MongoClient(uri)
         self.db = self.client[db_name]
         self.collection = self.db[collection_name]
