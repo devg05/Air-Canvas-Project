@@ -16,12 +16,12 @@
     <h1><b>Welcome to Air Canvas!</b></h1>
     <br>
     <h1> Create Your Free Account </h1>
-    <form action="/signup" method="POST">
+    <form action="{{ url_for('auth_routes.signup_page') }}" method="POST">
         <input name="user" id="user" type="text" placeholder="Username">
         <input name="pass" id="pass" type="password" placeholder="Password">
         <input name="email" id="email" type="email" placeholder="abc@email.com">
         <button> Create New Account </button>
     </form>
-    <a href="/login"> Already have an Account</a>
+    <a href="{{ url_for('auth_routes.login_page') }}"> Already have an Account</a>
  </center>
 
