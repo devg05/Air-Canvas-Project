@@ -1,10 +1,9 @@
 '''
 Here all the routes related to login/ signup will come'''
 
-from services.auth_service import generate_tokens
 from models.model import DatabaseConnection
-from flask import render_template, request, make_response
-from flask import Blueprint, render_template
+from services.auth_service import generate_tokens
+from flask import render_template, request, make_response, Blueprint
 
 auth_routes = Blueprint('auth_routes', __name__)
 

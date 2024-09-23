@@ -10,54 +10,79 @@
 </head>
 
 <body>
+  {% include "header.html" %}
   <br>
   <center>
     <h1><b>Welcome to Air Canvas!</b></h1>
     <!-- Initially hide the image -->
     <img src="" id="canvas" style="display: none;"><br><br>
     <a href="javascript:void(0);" role="button" id="pause" onclick="toggleVideo()">START</a>
-    <a href="{{url_for('user_routes.index')}}" role="button">BACK</a>
+    <a href="{{url_for('user_routes.logout_page')}}" role="button">BACK</a>
   </center>
 
   {% include "footer.html" %}
-  
-  <script>
-    async function requestCameraAccess() {
-      try {
-        // Request camera access without assigning the stream to a video element
-        const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-        console.log("Camera access granted");
-        
-        // Stop all tracks immediately after granting access (to avoid continuous streaming)
-        stream.getTracks().forEach(track => track.stop());
-        
-      } catch (error) {
-        console.error('Error accessing camera:', error);
-        alert('Camera access is required to use this feature.');
-      }
-    }
-  
-    // Call this function when you want to request camera access
-    requestCameraAccess();
-  </script>  
-  
-  <script>
-    function toggleVideo() {
-      const videoContainer = document.getElementById('canvas');
-      const button = document.getElementById('pause');
 
-      if (videoContainer.style.display === 'none') {
-        // Show the image and change button text to STOP
-        videoContainer.style.display = 'block';
-        videoContainer.src = "{{ url_for('user_routes.video_feed') }}";
-        button.textContent = 'STOP';
-      } else {
-        // Hide the image and break the connection
-        videoContainer.style.display = 'none';
-        videoContainer.src = "";
-        button.textContent = 'START';
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      async function requestCameraAccess() {
+          try {
+              // Request camera access without assigning the stream to a video element
+              const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+              console.log("Camera access granted");
+              
+              // Stop all tracks immediately after granting access (to avoid continuous streaming)
+              stream.getTracks().forEach(track => track.stop());
+              
+          } catch (error) {
+              console.error('Error accessing camera:', error);
+              alert('Camera access is required to use this feature.');
+          }
       }
-    }
+    
+      // Call this function when you want to request camera access
+      requestCameraAccess();
+    
+      function toggleVideo() {
+          const videoContainer = document.getElementById('canvas');
+          const button = document.getElementById('pause');
+    
+          if (videoContainer.style.display === 'none') {
+              // Show the image and change button text to STOP
+              videoContainer.style.display = 'block';
+              videoContainer.src = "{{ url_for('user_routes.video_feed') }}";
+              button.textContent = 'STOP';
+          } else {
+              // Hide the image and break the connection
+              videoContainer.style.display = 'none';
+              videoContainer.src = "";
+              button.textContent = 'START';
+          }
+      }
+    
+      const userIcon = document.getElementById('userIcon');
+      const menu = document.getElementById('menu');
+    
+      userIcon.addEventListener('mouseover', function() {
+          menu.style.display = 'block';
+          userIcon.style.fontWeight = 600;
+      });
+    
+      userIcon.addEventListener('mouseout', function() {
+          setTimeout(function() {
+              if (!menu.matches(':hover')) {
+                  menu.style.display = 'none';
+              }
+          }, 300);
+      });
+    
+      menu.addEventListener('mouseleave', function() {
+          menu.style.display = 'none';
+          userIcon.style.fontWeight = 300;
+      });
+    
+      // Add event listener for the toggle button
+      document.getElementById('pause').addEventListener('click', toggleVideo);
+    });
   </script>
 
 </body>

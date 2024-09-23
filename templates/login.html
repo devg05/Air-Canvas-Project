@@ -21,6 +21,9 @@
     {% if login %}
         <p style="color: blue;">{{ login }}</p>  <!-- Display the error message -->
     {% endif %}
+    {% if logout %}
+        <p style="color: blue;">{{ logout }}</p>  <!-- Display the error message -->
+    {% endif %}
     <form action="{{ url_for('auth_routes.login_page') }}" method="POST">
       <input name="user" id="user" type="text" placeholder="Username">
       <input name="pass" id="pass" type="password" placeholder="Password">
