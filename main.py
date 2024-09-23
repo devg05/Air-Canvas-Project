@@ -9,6 +9,18 @@ hands = mp_hands.Hands(static_image_mode=False, max_num_hands=2, min_detection_c
 
 def generate_frames():
 
+    cameras = []
+    for i in range(-1,11):
+        cap = cv2.VideoCapture(i)
+        if cap.isOpened():
+            cameras.append(i)
+            cap.release()
+
+    if cameras:
+        print("Available cameras:", cameras)
+    else:
+        print("No cameras found.")
+
     def nothing(q):
         pass
 
