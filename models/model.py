@@ -23,7 +23,7 @@ class DatabaseConnection:
     def insert_document(self, document):
         schema = {
             'name': str,
-            'password': str,
+            'password': bytes,
             'email': str
             }
         self.validate_data(document, schema)

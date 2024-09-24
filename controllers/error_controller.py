@@ -1,8 +1,8 @@
-# error_handlers.py
-from flask import Blueprint
-import traceback
+'''Here we will manage different webpages for different errors'''
 
-# Create a Blueprint for error handlers
+import traceback
+from flask import Blueprint, render_template
+
 error_handlers = Blueprint('error_handlers', __name__)
 
 @error_handlers.app_errorhandler(500)
@@ -12,4 +12,4 @@ def internal_error(error):
 
 @error_handlers.app_errorhandler(404)
 def page_not_found(error):
-    return "Page not found", 404
+    return render_template('error404.html')

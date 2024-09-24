@@ -1,0 +1,22 @@
+body {
+    background-color: aliceblue;
+    font-family: Arial, Helvetica, sans-serif, sans-serif;
+}
+
+div{
+    margin-top: 13%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+h1{
+    color: #349beb; 
+    margin:0;
+    font-size: 150px;
+}
+
+p{
+    font-size: 20px;
+    margin: 0;
+}

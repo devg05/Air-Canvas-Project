@@ -1,6 +1,7 @@
 '''
 Here all the routes related to login/ signup will come'''
 
+import bcrypt
 from models.model import DatabaseConnection
 from services.auth_service import generate_tokens
 from flask import render_template, request, make_response, Blueprint
@@ -23,12 +24,12 @@ def login_page():
             print(f"Error retrieving data: {e}")  # Catch any errors while retrieving data
         
         if (data) is not None:
-            if (data['password'] != passw):
+            if not bcrypt.checkpw(passw.encode('utf-8'), data['password']):
                 error_msg = "Wrong Credentials"
                 return render_template('login.html', error=error_msg)
             else:
                 tokens = generate_tokens(usern)
-                resp = make_response(render_template('index.html'))
+                resp = make_response(render_template('index.html', user=usern))
                 resp.set_cookie('access_token', tokens.get('access_token'), httponly=True, samesite='Lax')
                 resp.set_cookie('refresh_token', tokens.get('refresh_token'), httponly=True, samesite='Lax')
                 return resp
@@ -58,6 +59,7 @@ def signup_page():
                 return render_template('signup.html', error=error_msg)
             
             if all([usern, passw, email]):
+                form_data['password'] = (bcrypt.hashpw(passw.encode('utf-8'), bcrypt.gensalt()))
                 inserted_id = db_conn.insert_document(form_data)
                 print(f"Document inserted with ID: {inserted_id}")
                 login_msg = "Account Registered Successfully"

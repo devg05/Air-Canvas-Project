@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='styles/header.css') }}">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <header id="header">
-    <h4 id="h1">Welcome {% if user %} {{ error }} {% endif %}</h4>
+    <h4 id="h1">Welcome  {% if user %} {{ user }} {% endif %}</h4>
     <div class="user-menu-container">
         <i class="fas fa-user" id="userIcon"></i>
         <div id="menu" class="menu">

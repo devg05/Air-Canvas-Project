@@ -4,7 +4,8 @@ All the other routes are to be present here'''
 # user_routes.py
 from main import generate_frames
 from middlewares.auth_middleware import token_required
-from flask import Blueprint, render_template, Response, request, make_response
+from flask import Blueprint, render_template, Response, make_response
+from middlewares.auth_middleware import verify_jwt_in_request, get_jwt_identity 
 
 # Create a Blueprint
 user_routes = Blueprint('user_routes', __name__)
@@ -13,10 +14,23 @@ user_routes = Blueprint('user_routes', __name__)
 def index():
     return render_template('login.html')
 
+@user_routes.route('/home')
+@token_required
+def home():
+    result, status_code = verify_jwt_in_request()  # Call the custom function
+    if status_code != 200:
+        raise Exception(result)
+    current_user = get_jwt_identity(result)
+    return render_template('home.html', user=current_user)
+
 @user_routes.route('/video')
 @token_required
 def video():
-    return render_template('video.html')
+    result, status_code = verify_jwt_in_request()  # Call the custom function
+    if status_code != 200:
+        raise Exception(result)
+    current_user = get_jwt_identity(result)
+    return render_template('video.html', user=current_user)
 
 @user_routes.route('/video_feed')
 @token_required
