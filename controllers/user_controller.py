@@ -14,6 +14,10 @@ user_routes = Blueprint('user_routes', __name__)
 def index():
     return render_template('login.html')
 
+@user_routes.route('/admin')
+def admin():
+    return render_template('admin.html')
+
 @user_routes.route('/home')
 @token_required
 def home():

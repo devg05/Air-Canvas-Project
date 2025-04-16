@@ -24,7 +24,8 @@ class DatabaseConnection:
         schema = {
             'name': str,
             'password': bytes,
-            'email': str
+            'email': str,
+            'role': int
             }
         self.validate_data(document, schema)
         result = self.collection.insert_one(document)

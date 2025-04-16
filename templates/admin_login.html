@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -6,13 +6,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/loginpage.css') }}">
-  <title>AIR CANVAS</title>
+  <title>admin</title>
 </head>
 
 <body>
   <br>
   <center>
-    <h1><b>Welcome to Air Canvas!</b></h1>
+    <h1><b>Welcome to Air Canvas Admin!</b></h1>
     <br>
     <h1> Please Login First </h1>
     {% if error %}
@@ -24,13 +24,11 @@
     {% if logout %}
         <p style="color: blue;">{{ logout }}</p>  <!-- Display the error message -->
     {% endif %}
-    <form action="{{ url_for('auth_routes.login_page') }}" method="POST">
+    <form action="{{ url_for('admin_routes.login_page') }}" method="POST">
       <input name="user" id="user" type="text" placeholder="Username">
       <input name="pass" id="pass" type="password" placeholder="Password">
       <button> Login </button>
     </form>
-    <a href="{{ url_for('oauth_routes.login') }}">Login with Google</a><br>
-    <a href="{{ url_for('auth_routes.signup_page') }}"> Create a New Account</a>
   </center>
   {% include "footer.html" %}
 </body>

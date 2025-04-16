@@ -29,9 +29,9 @@ def login_page():
                 return render_template('login.html', error=error_msg)
             else:
                 tokens = generate_tokens(usern)
-                resp = make_response(render_template('index.html', user=usern))
-                resp.set_cookie('access_token', tokens.get('access_token'), httponly=True, samesite='Lax')
-                resp.set_cookie('refresh_token', tokens.get('refresh_token'), httponly=True, samesite='Lax')
+                resp = make_response(render_template('home.html', user=usern))
+                resp.set_cookie('access_token', tokens.get('access_token'), httponly=True)
+                resp.set_cookie('refresh_token', tokens.get('refresh_token'), httponly=True)
                 return resp
         else:
             error_msg = "Wrong Credentials"
@@ -46,7 +46,7 @@ def signup_page():
         passw = request.form.get('pass')
         email = request.form.get('email')
 
-        form_data = {'name':usern, 'password':passw, 'email':email}
+        form_data = {'name':usern, 'password':passw, 'email':email, 'role': 0}
         
         try:
             find_user = db['users'].find_one({"name":usern})
