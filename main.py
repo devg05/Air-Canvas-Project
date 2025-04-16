@@ -45,7 +45,7 @@ def generate_frames():
     cv2.createTrackbar('Brush Size', 'Canvas', 5, 20, nothing)
 
     xp, yp = 0,0
-    while True:
+    while cap.isOpened():
         _,img = cap.read()
         img = cv2.flip(img,1)
         img = det.findHands(img, False,w, h)
